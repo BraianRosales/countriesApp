@@ -1,1 +1,38 @@
-<h1>Bienvenidos a paisesApp</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <H2>Busquedas</H2>
+      <hr />
+      <div class="list-group">
+        <div
+          class="list-group-item"
+          style="cursor: pointer"
+          routerLink=""
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Buscar país
+        </div>
+        <div
+          class="list-group-item"
+          style="cursor: pointer"
+          routerLink="region"
+          routerLinkActive="active"
+        >
+          Por región
+        </div>
+        <div
+          class="list-group-item"
+          style="cursor: pointer"
+          routerLink="capital"
+          routerLinkActive="active"
+        >
+          Por capital
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
