@@ -1,1 +1,40 @@
-<p>by-country works!</p>
+<h2>Por pais:</h2>
+<hr />
+<!-- input search -->
+<div class="mb-3">
+  <form (ngSubmit)="search()">
+    <input
+      type="text"
+      class="form-control"
+      id="exampleFormControlInput1"
+      placeholder="Buscar pais..."
+      name="textTerm"
+      [(ngModel)]="textTerm"
+    />
+  </form>
+</div>
+<!-- alert -->
+<div *ngIf="thereIsAError" class="alert alert-danger" role="alert">
+  No se encontro el termino buscado: {{ textTerm }}!
+</div>
+<!-- table -->
+<table *ngIf="!thereIsAError" class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Bandera</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Población</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>bandera</td>
+      <td>nombre</td>
+      <td>123123124124</td>
+      <td><a href="">ver...</a></td>
+    </tr>
+  </tbody>
+</table>
