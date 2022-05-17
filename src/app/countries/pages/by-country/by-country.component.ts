@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CountryService } from '../../services/country.service';
+import { CountryResponse } from '../../interfaces/countryResponse.interface';
 
 @Component({
   selector: 'app-by-country',
@@ -9,22 +10,30 @@ import { CountryService } from '../../services/country.service';
 export class ByCountryComponent {
   constructor(private CountryService: CountryService) {}
 
-  public textTerm: string = '';
   public thereIsAError: boolean = false;
+  public thereAreCountries: boolean = false;
+  public textTerm: string = '';
+  public textError: string = '';
+  public lsCountries: CountryResponse[] = [];
 
   search() {
     if (this.textTerm.trim().length > 0) {
       this.thereIsAError = false;
-
       this.CountryService.searchCountry(this.textTerm).subscribe(
         (res) => {
-          console.log(res);
+          console.log(res[0]);
+          this.lsCountries = res;
+          if (this.lsCountries) {
+            this.thereAreCountries = true;
+          }
+          // localStorage.setItem('Paises encontrados', JSON.stringify(res));
         },
         (err) => {
           this.thereIsAError = true;
         }
       ),
-        (this.textTerm = '');
+        (this.textError = this.textTerm);
+      this.textTerm = '';
     }
   }
 }
