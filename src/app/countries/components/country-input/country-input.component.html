@@ -3,8 +3,10 @@
     type="text"
     class="form-control"
     id="exampleFormControlInput1"
-    placeholder="Buscar pais..."
+    [placeholder]="placeholder"
     name="textInput"
+    (input)="pressKey()"
     [(ngModel)]="textInput"
+    autocomplete="off"
   />
 </form>

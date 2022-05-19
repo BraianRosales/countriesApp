@@ -2,7 +2,11 @@
 <hr />
 <!-- input search -->
 <div class="mb-3">
-  <app-country-input (onEnter)="search($event)"></app-country-input>
+  <app-country-input
+    placeholder="por país..."
+    (onEnter)="search($event)"
+    (onDebounce)="suggestions($event)"
+  ></app-country-input>
 </div>
 <!-- alert -->
 <div *ngIf="thereIsAError" class="alert alert-danger" role="alert">

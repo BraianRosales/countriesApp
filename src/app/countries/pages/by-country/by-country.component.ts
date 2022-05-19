@@ -15,6 +15,7 @@ export class ByCountryComponent {
   public lsCountries: CountryResponse[] = [];
   public text: string = '';
   public errorText: string = '';
+  public placeholder: string = '';
 
   //los eventos son mandados del hijo al padre con un @Ouput.
   search(textInput: string) {
@@ -33,5 +34,10 @@ export class ByCountryComponent {
       ),
         (this.errorText = this.text);
     }
+  }
+
+  suggestions(txtPressKey: string) {
+    this.thereIsAError = false;
+    console.log(txtPressKey);
   }
 }

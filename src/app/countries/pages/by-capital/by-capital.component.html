@@ -1,1 +1,19 @@
-<p>by-capital works!</p>
+<h2>Por Capital:</h2>
+<hr />
+<!-- input search -->
+<div class="mb-3">
+  <app-country-input
+    (onEnter)="searchCapital($event)"
+    (onDebounce)="suggestions($event)"
+    placeholder="por capital..."
+  ></app-country-input>
+</div>
+<!-- alert -->
+<div *ngIf="thereIsAError" class="alert alert-danger" role="alert">
+  No se encontro el termino buscado: {{ errorText }}
+</div>
+<!-- table -->
+<app-country-table
+  [lsCountriesChild]="lsCountries"
+  [thereIsAErrorChild]="thereIsAError"
+></app-country-table>

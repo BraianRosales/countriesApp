@@ -4,6 +4,7 @@
       <th scope="col">#</th>
       <th scope="col">Bandera</th>
       <th scope="col" class="country-name">Nombre</th>
+      <th scope="col" class="country-name">Capital</th>
       <th scope="col">Población</th>
       <th scope="col"></th>
     </tr>
@@ -13,6 +14,7 @@
       <th scope="row">{{ i }}</th>
       <td><img src="{{ country.flags.png }}" class="img-flag" /></td>
       <td class="country-name">{{ country.name.common }}</td>
+      <td class="country-name">{{ country.capital }}</td>
       <td>{{ country.population | number }}</td>
       <td><a [routerLink]="['/pais', country.cca2]">ver mas...</a></td>
     </tr>
