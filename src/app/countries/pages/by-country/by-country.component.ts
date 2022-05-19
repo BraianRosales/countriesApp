@@ -10,30 +10,28 @@ import { CountryResponse } from '../../interfaces/countryResponse.interface';
 export class ByCountryComponent {
   constructor(private CountryService: CountryService) {}
 
+  //las propiedades pueden ser mandadas a los componentes hijos por medio de los @input()
   public thereIsAError: boolean = false;
-  public thereAreCountries: boolean = false;
-  public textTerm: string = '';
-  public textError: string = '';
   public lsCountries: CountryResponse[] = [];
+  public text: string = '';
+  public errorText: string = '';
 
-  search() {
-    if (this.textTerm.trim().length > 0) {
+  //los eventos son mandados del hijo al padre con un @Ouput.
+  search(textInput: string) {
+    this.text = textInput;
+    if (this.text.trim().length > 0) {
       this.thereIsAError = false;
-      this.CountryService.searchCountry(this.textTerm).subscribe(
+      this.CountryService.searchCountry(this.text).subscribe(
         (res) => {
-          console.log(res[0]);
           this.lsCountries = res;
           if (this.lsCountries) {
-            this.thereAreCountries = true;
           }
-          // localStorage.setItem('Paises encontrados', JSON.stringify(res));
         },
         (err) => {
           this.thereIsAError = true;
         }
       ),
-        (this.textError = this.textTerm);
-      this.textTerm = '';
+        (this.errorText = this.text);
     }
   }
 }

@@ -11,6 +11,7 @@ export class CountryService {
 
   constructor(private Http: HttpClient) {}
 
+  //CountryResponse es una interface creada basada por una petición con quicktype.
   searchCountry(textTerm: string): Observable<CountryResponse[]> {
     return this.Http.get<CountryResponse[]>(`${this.apiUrl}/name/${textTerm}`);
   }

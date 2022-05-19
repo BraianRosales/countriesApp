@@ -2,39 +2,14 @@
 <hr />
 <!-- input search -->
 <div class="mb-3">
-  <form (ngSubmit)="search()">
-    <input
-      type="text"
-      class="form-control"
-      id="exampleFormControlInput1"
-      placeholder="Buscar pais..."
-      name="textTerm"
-      [(ngModel)]="textTerm"
-    />
-  </form>
+  <app-country-input (onEnter)="search($event)"></app-country-input>
 </div>
 <!-- alert -->
 <div *ngIf="thereIsAError" class="alert alert-danger" role="alert">
-  No se encontro el termino buscado: {{ textError }}
+  No se encontro el termino buscado: {{ errorText }}
 </div>
 <!-- table -->
-<table *ngIf="!thereIsAError && thereAreCountries" class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Bandera</th>
-      <th scope="col" class="country-name">Nombre</th>
-      <th scope="col">Población</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let country of lsCountries; let i = index">
-    <tr>
-      <th scope="row">{{ i }}</th>
-      <td><img src="{{ country.flags.png }}" class="img-flag" /></td>
-      <td class="country-name">{{ country.name.common }}</td>
-      <td>{{ country.population | number }}</td>
-      <td><a [routerLink]="['/pais', country.cca2]">ver mas...</a></td>
-    </tr>
-  </tbody>
-</table>
+<app-country-table
+  [lsCountriesChild]="lsCountries"
+  [thereIsAErrorChild]="thereIsAError"
+></app-country-table>
