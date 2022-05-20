@@ -1,1 +1,45 @@
-<p>see-country works!</p>
+<div class="cointainer">
+  <!-- Spinner -->
+  <div
+    *ngIf="!country; else viewCountry"
+    class="spinner-border center text-danger"
+    role="status"
+  >
+    <span class="visually-hidden">Espere cargando el país...</span>
+  </div>
+
+  <!-- Vista del país -->
+  <ng-template #viewCountry class="viewCountry">
+    <h2>Detalle del pais:</h2>
+    <hr />
+    <div class="card center mb-5" style="width: 35rem">
+      <img src="{{ country.flags.svg }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h2 class="card-title">{{ country.name.common }}</h2>
+        <h5>Paises limites:</h5>
+        <p *ngFor="let country of country.borders" class="card-text">
+          <li>{{ country }}</li>
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h5>Continente:</h5>
+          {{ country.continents }}
+        </li>
+        <li class="list-group-item">
+          <h5>Población:</h5>
+          {{ country.population }}
+        </li>
+        <li class="list-group-item">
+          <h5>Area:</h5>
+          {{ country.area }}
+        </li>
+      </ul>
+      <div class="card-body">
+        <a [routerLink]="['']">Buscar por país</a>
+        <br />
+        <a [routerLink]="['/capital']">Buscar por Capital</a>
+      </div>
+    </div>
+  </ng-template>
+</div>

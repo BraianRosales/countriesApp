@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { CountryResponse } from '../../interfaces/countryResponse.interface';
 import { CountryService } from '../../services/country.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { CountryService } from '../../services/country.service';
   styleUrls: ['./see-country.component.css'],
 })
 export class SeeCountryComponent implements OnInit {
+  public country!: CountryResponse;
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _countryService: CountryService
@@ -22,9 +25,12 @@ export class SeeCountryComponent implements OnInit {
         )
       )
       .subscribe((res) => {
-        console.log(res[0]);
+        setTimeout(() => {
+          console.log(res[0]);
+          this.country = res[0];
+        }, 1000);
       });
-      
+
     // this._activatedRoute.params.subscribe(({ id }) => {
     //   this._countryService.searchViewCountry(id).subscribe((country) => {
     //     console.log(country[0]);

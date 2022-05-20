@@ -1,1 +1,27 @@
-<p>by-region works!</p>
+<h2>Por región:</h2>
+<hr />
+<div class="container">
+  <!-- Navbar -->
+  <div class="col">
+    <div style="padding-left: 210px; padding-top: 15px">
+      <button
+        *ngFor="let region of regions"
+        style="margin-right: 7px; margin-bottom: 40px"
+        (click)="activateRegion(region)"
+        [class]="getChangesBtn(region)"
+      >
+        {{ region | titlecase }}
+      </button>
+    </div>
+  </div>
+  <!-- alert -->
+  <div *ngIf="thereIsAError" class="alert alert-danger" role="alert">
+    No se encontro el termino buscado: {{ errorText }}
+  </div>
+  <!-- table -->
+  <app-country-table
+    class="mt-5"
+    [lsCountriesChild]="lsCountries"
+    [thereIsAErrorChild]="thereIsAError"
+  ></app-country-table>
+</div>

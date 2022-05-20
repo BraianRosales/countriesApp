@@ -19,7 +19,7 @@ export class CountryInputComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.debounce.pipe(debounceTime(500)).subscribe((value) => {
+    this.debounce.pipe(debounceTime(200)).subscribe((value) => {
       this.onDebounce.emit(value);
     });
   }

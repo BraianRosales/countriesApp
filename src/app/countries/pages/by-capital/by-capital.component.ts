@@ -15,6 +15,7 @@ export class ByCapitalComponent {
   public lsCountries: CountryResponse[] = [];
   public text: string = '';
   public errorText: string = '';
+  public countriesSuggestions: CountryResponse[] = [];
 
   //los eventos son mandados del hijo al padre con un @Ouput.
   searchCapital(textInput: string) {
@@ -36,7 +37,12 @@ export class ByCapitalComponent {
   }
 
   suggestions(txtPressKey: string) {
+    this.lsCountries = [];
     this.thereIsAError = false;
-    console.log(txtPressKey);
+
+    this.CountryService.searchCapital(txtPressKey).subscribe(
+      (res) => (this.countriesSuggestions = res.splice(0, 5)),
+      (err) => (this.countriesSuggestions = [])
+    );
   }
 }

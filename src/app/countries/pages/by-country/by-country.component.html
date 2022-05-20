@@ -1,7 +1,7 @@
 <h2>Por pais:</h2>
 <hr />
 <!-- input search -->
-<div class="mb-3">
+<div>
   <app-country-input
     placeholder="por país..."
     (onEnter)="search($event)"
@@ -12,8 +12,23 @@
 <div *ngIf="thereIsAError" class="alert alert-danger" role="alert">
   No se encontro el termino buscado: {{ errorText }}
 </div>
+
+<!-- suggestions -->
+<div *ngIf="lsCountries.length == 0">
+  <div class="list-group" *ngFor="let country of countriesSuggestions">
+    <button type="button" class="list-group-item list-group-item-action">
+      <td>
+        <a class="name-suggestions" [routerLink]="['/pais', country.cca2]">
+          {{ country.name.common }}
+        </a>
+      </td>
+    </button>
+  </div>
+</div>
+
 <!-- table -->
 <app-country-table
+  *ngIf="lsCountries.length > 0"
   [lsCountriesChild]="lsCountries"
   [thereIsAErrorChild]="thereIsAError"
 ></app-country-table>

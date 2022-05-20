@@ -15,7 +15,7 @@ export class ByCountryComponent {
   public lsCountries: CountryResponse[] = [];
   public text: string = '';
   public errorText: string = '';
-  public placeholder: string = '';
+  public countriesSuggestions: CountryResponse[] = [];
 
   //los eventos son mandados del hijo al padre con un @Ouput.
   search(textInput: string) {
@@ -25,8 +25,6 @@ export class ByCountryComponent {
       this.CountryService.searchCountry(this.text).subscribe(
         (res) => {
           this.lsCountries = res;
-          if (this.lsCountries) {
-          }
         },
         (err) => {
           this.thereIsAError = true;
@@ -37,7 +35,14 @@ export class ByCountryComponent {
   }
 
   suggestions(txtPressKey: string) {
+    this.lsCountries = [];
     this.thereIsAError = false;
-    console.log(txtPressKey);
+
+    this.CountryService.searchCountry(txtPressKey).subscribe(
+      (res) => {
+        this.countriesSuggestions = res.splice(0, 5);
+      },
+      (err) => (this.countriesSuggestions = [])
+    );
   }
 }
