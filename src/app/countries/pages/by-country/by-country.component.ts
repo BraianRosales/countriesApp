@@ -10,14 +10,14 @@ import { CountryResponse } from '../../interfaces/countryResponse.interface';
 export class ByCountryComponent {
   constructor(private CountryService: CountryService) {}
 
-  //las propiedades pueden ser mandadas a los componentes hijos por medio de los @input()
+  //Las propiedades pueden ser mandadas a los componentes hijos por medio de los @input()
   public thereIsAError: boolean = false;
   public lsCountries: CountryResponse[] = [];
   public text: string = '';
   public errorText: string = '';
   public countriesSuggestions: CountryResponse[] = [];
 
-  //los eventos son mandados del hijo al padre con un @Ouput.
+  //Los eventos son mandados del hijo al padre con un @Ouput.
   search(textInput: string) {
     this.text = textInput;
     if (this.text.trim().length > 0) {
@@ -40,9 +40,13 @@ export class ByCountryComponent {
 
     this.CountryService.searchCountry(txtPressKey).subscribe(
       (res) => {
-        this.countriesSuggestions = res.splice(0, 5);
+        this.countriesSuggestions = res.splice(0, 10);
       },
-      (err) => (this.countriesSuggestions = [])
+      (err) => {
+        this.thereIsAError = true;
+        this.errorText = txtPressKey;
+        this.countriesSuggestions = [];
+      }
     );
   }
 }
